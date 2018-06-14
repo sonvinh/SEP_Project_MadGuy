@@ -17,8 +17,8 @@ namespace SEP_Team1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SinhVien()
         {
-            this.KhoaHoc = new HashSet<KhoaHoc>();
-            this.DiemDanh = new HashSet<DiemDanh>();
+            this.DiemDanhs = new HashSet<DiemDanh>();
+            this.KhoaHocs = new HashSet<KhoaHoc>();
         }
     
         public string MSSV { get; set; }
@@ -29,8 +29,8 @@ namespace SEP_Team1.Models
         public string mavantay { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KhoaHoc> KhoaHoc { get; set; }
+        public virtual ICollection<DiemDanh> DiemDanhs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiemDanh> DiemDanh { get; set; }
+        public virtual ICollection<KhoaHoc> KhoaHocs { get; set; }
     }
 }

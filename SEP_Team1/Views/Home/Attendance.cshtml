@@ -79,7 +79,7 @@
                                         @foreach (var item in diemdanh)
                                         {
                                             <tr>
-                                                <td><a href="/Home/StudentProfile/@item.MSSV">@item.MSSV</td>
+                                                <td><a href="/Home/StudentProfile/@item.MSSV"/>@item.MSSV</td>
                                                 <td>@item.SinhVien.ho</td>
                                                 <td>@item.SinhVien.ten</td>
                                                 @if (item.SinhVien.gioiTinh == true)
@@ -129,7 +129,7 @@
                     url: form.attr('action'),
                     data: form.serialize(),
                     success: function (result) {
-                        alert('ok');
+                        alert('Changes Completed');
                     },
                     error: function (response) {
                         $('#student-list').html(response.responseText);

@@ -17,19 +17,19 @@ namespace SEP_Team1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BangBuoiHoc()
         {
-            this.DiemDanh = new HashSet<DiemDanh>();
+            this.DiemDanhs = new HashSet<DiemDanh>();
         }
     
         public string maBH { get; set; }
-        public string maKH { get; set; }
         public Nullable<System.DateTime> ngay { get; set; }
         public Nullable<System.TimeSpan> gio { get; set; }
         public string phong { get; set; }
+        public string maKH { get; set; }
         public Nullable<System.TimeSpan> gioBatDau { get; set; }
         public Nullable<System.TimeSpan> gioKetThuc { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiemDanh> DiemDanh { get; set; }
         public virtual KhoaHoc KhoaHoc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DiemDanh> DiemDanhs { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SEPdataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="sep21t21Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BangBuoiHoc">
           <Key>
             <PropertyRef Name="maBH" />
@@ -188,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SEPdataModelStoreContainer">
+        <EntityContainer Name="sep21t21ModelStoreContainer">
           <EntitySet Name="BangBuoiHoc" EntityType="Self.BangBuoiHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiemDanh" EntityType="Self.DiemDanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GiangDay" EntityType="Self.GiangDay" Schema="dbo" store:Type="Tables" />
@@ -231,23 +231,24 @@
             <End Role="sv_kh" EntitySet="sv_kh" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SEPdataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="sep21t21Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BangBuoiHoc">
           <Key>
             <PropertyRef Name="maBH" />
           </Key>
           <Property Name="maBH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="maKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ngay" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="DiemDanh" Relationship="Self.FK_DiemDanh_BuoiHoc" FromRole="BangBuoiHoc" ToRole="DiemDanh" />
-          <NavigationProperty Name="KhoaHoc" Relationship="SEPdataModel.FK_BangBuoiHoc_KhoaHoc" FromRole="BangBuoiHoc" ToRole="KhoaHoc" />
           <Property Name="gio" Type="Time" Precision="2" />
           <Property Name="phong" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="maKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="gioBatDau" Type="Time" Precision="2" />
           <Property Name="gioKetThuc" Type="Time" Precision="2" />
+          <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="BangBuoiHoc" ToRole="KhoaHoc" />
+          <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="BangBuoiHoc" ToRole="DiemDanh" />
         </EntityType>
         <EntityType Name="DiemDanh">
           <Key>
@@ -258,8 +259,8 @@
           <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="diemDanh1" Type="Boolean" Nullable="false" />
           <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BangBuoiHoc" Relationship="Self.FK_DiemDanh_BuoiHoc" FromRole="DiemDanh" ToRole="BangBuoiHoc" />
-          <NavigationProperty Name="SinhVien" Relationship="SEPdataModel.FK_DiemDanh_SinhVien" FromRole="DiemDanh" ToRole="SinhVien" />
+          <NavigationProperty Name="BangBuoiHoc" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="DiemDanh" ToRole="BangBuoiHoc" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="DiemDanh" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="GiangVien">
           <Key>
@@ -270,7 +271,7 @@
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ngaySinh" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="MonHoc" Relationship="Self.GiangDay" FromRole="GiangVien" ToRole="MonHoc" />
+          <NavigationProperty Name="MonHocs" Relationship="Self.GiangDay" FromRole="GiangVien" ToRole="MonHoc" />
         </EntityType>
         <EntityType Name="KhoaHoc">
           <Key>
@@ -282,9 +283,9 @@
           <Property Name="ngayketthuc" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="maMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sobuoihoc" Type="Int32" />
+          <NavigationProperty Name="BangBuoiHocs" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="BangBuoiHoc" />
           <NavigationProperty Name="MonHoc" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="KhoaHoc" ToRole="MonHoc" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.sv_kh" FromRole="KhoaHoc" ToRole="SinhVien" />
-          <NavigationProperty Name="BangBuoiHoc" Relationship="SEPdataModel.FK_BangBuoiHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="BangBuoiHoc" />
+          <NavigationProperty Name="SinhViens" Relationship="Self.sv_kh" FromRole="KhoaHoc" ToRole="SinhVien" />
         </EntityType>
         <EntityType Name="MonHoc">
           <Key>
@@ -292,8 +293,8 @@
           </Key>
           <Property Name="maMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tenMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="MonHoc" ToRole="KhoaHoc" />
-          <NavigationProperty Name="GiangVien" Relationship="Self.GiangDay" FromRole="MonHoc" ToRole="GiangVien" />
+          <NavigationProperty Name="KhoaHocs" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="MonHoc" ToRole="KhoaHoc" />
+          <NavigationProperty Name="GiangViens" Relationship="Self.GiangDay" FromRole="MonHoc" ToRole="GiangVien" />
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
@@ -305,10 +306,10 @@
           <Property Name="ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ngaySinh" Type="DateTime" Precision="3" />
           <Property Name="mavantay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KhoaHoc" Relationship="Self.sv_kh" FromRole="SinhVien" ToRole="KhoaHoc" />
-          <NavigationProperty Name="DiemDanh" Relationship="SEPdataModel.FK_DiemDanh_SinhVien" FromRole="SinhVien" ToRole="DiemDanh" />
+          <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="SinhVien" ToRole="DiemDanh" />
+          <NavigationProperty Name="KhoaHocs" Relationship="Self.sv_kh" FromRole="SinhVien" ToRole="KhoaHoc" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -318,7 +319,19 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_DiemDanh_BuoiHoc">
+        <Association Name="FK_BangBuoiHoc_KhoaHoc">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="maKH" />
+            </Principal>
+            <Dependent Role="BangBuoiHoc">
+              <PropertyRef Name="maKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiemDanh_BangBuoiHoc">
           <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="1" />
           <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
           <ReferentialConstraint>
@@ -327,6 +340,18 @@
             </Principal>
             <Dependent Role="DiemDanh">
               <PropertyRef Name="maBH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiemDanh_SinhVien">
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
+          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinhVien">
+              <PropertyRef Name="MSSV" />
+            </Principal>
+            <Dependent Role="DiemDanh">
+              <PropertyRef Name="MSSV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -350,84 +375,60 @@
           <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="SEPdataEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BangBuoiHoc" EntityType="Self.BangBuoiHoc" />
-          <EntitySet Name="DiemDanh" EntityType="Self.DiemDanh" />
-          <EntitySet Name="GiangVien" EntityType="Self.GiangVien" />
-          <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" />
-          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" />
-          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_DiemDanh_BuoiHoc" Association="Self.FK_DiemDanh_BuoiHoc">
-            <End Role="BangBuoiHoc" EntitySet="BangBuoiHoc" />
-            <End Role="DiemDanh" EntitySet="DiemDanh" />
+        <EntityContainer Name="sep21t21Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BangBuoiHocs" EntityType="Self.BangBuoiHoc" />
+          <EntitySet Name="DiemDanhs" EntityType="Self.DiemDanh" />
+          <EntitySet Name="GiangViens" EntityType="Self.GiangVien" />
+          <EntitySet Name="KhoaHocs" EntityType="Self.KhoaHoc" />
+          <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
+          <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_BangBuoiHoc_KhoaHoc" Association="Self.FK_BangBuoiHoc_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="BangBuoiHoc" EntitySet="BangBuoiHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiemDanh_BangBuoiHoc" Association="Self.FK_DiemDanh_BangBuoiHoc">
+            <End Role="BangBuoiHoc" EntitySet="BangBuoiHocs" />
+            <End Role="DiemDanh" EntitySet="DiemDanhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiemDanh_SinhVien" Association="Self.FK_DiemDanh_SinhVien">
+            <End Role="SinhVien" EntitySet="SinhViens" />
+            <End Role="DiemDanh" EntitySet="DiemDanhs" />
           </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_MonHoc" Association="Self.FK_KhoaHoc_MonHoc">
-            <End Role="MonHoc" EntitySet="MonHoc" />
-            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+            <End Role="MonHoc" EntitySet="MonHocs" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
           </AssociationSet>
           <AssociationSet Name="GiangDay" Association="Self.GiangDay">
-            <End Role="GiangVien" EntitySet="GiangVien" />
-            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="GiangVien" EntitySet="GiangViens" />
+            <End Role="MonHoc" EntitySet="MonHocs" />
           </AssociationSet>
           <AssociationSet Name="sv_kh" Association="Self.sv_kh">
-            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
-            <End Role="SinhVien" EntitySet="SinhVien" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BangBuoiHoc_KhoaHoc" Association="SEPdataModel.FK_BangBuoiHoc_KhoaHoc">
-            <End Role="KhoaHoc" EntitySet="KhoaHoc" />
-            <End Role="BangBuoiHoc" EntitySet="BangBuoiHoc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiemDanh_SinhVien" Association="SEPdataModel.FK_DiemDanh_SinhVien">
-            <End Role="SinhVien" EntitySet="SinhVien" />
-            <End Role="DiemDanh" EntitySet="DiemDanh" />
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_BangBuoiHoc_KhoaHoc">
-          <End Type="SEPdataModel.KhoaHoc" Role="KhoaHoc" Multiplicity="1" />
-          <End Type="SEPdataModel.BangBuoiHoc" Role="BangBuoiHoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhoaHoc">
-              <PropertyRef Name="maKH" />
-            </Principal>
-            <Dependent Role="BangBuoiHoc">
-              <PropertyRef Name="maKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiemDanh_SinhVien">
-          <End Type="SEPdataModel.SinhVien" Role="SinhVien" Multiplicity="1" />
-          <End Type="SEPdataModel.DiemDanh" Role="DiemDanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SinhVien">
-              <PropertyRef Name="MSSV" />
-            </Principal>
-            <Dependent Role="DiemDanh">
-              <PropertyRef Name="MSSV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SEPdataModelStoreContainer" CdmEntityContainer="SEPdataEntities">
-          <EntitySetMapping Name="BangBuoiHoc">
-            <EntityTypeMapping TypeName="SEPdataModel.BangBuoiHoc">
+        <EntityContainerMapping StorageEntityContainer="sep21t21ModelStoreContainer" CdmEntityContainer="sep21t21Entities">
+          <EntitySetMapping Name="BangBuoiHocs">
+            <EntityTypeMapping TypeName="sep21t21Model.BangBuoiHoc">
               <MappingFragment StoreEntitySet="BangBuoiHoc">
-                <ScalarProperty Name="gioKetThuc" ColumnName="gioKetThuc" />
-                <ScalarProperty Name="gioBatDau" ColumnName="gioBatDau" />
-                <ScalarProperty Name="phong" ColumnName="phong" />
-                <ScalarProperty Name="gio" ColumnName="gio" />
                 <ScalarProperty Name="maBH" ColumnName="maBH" />
-                <ScalarProperty Name="maKH" ColumnName="maKH" />
                 <ScalarProperty Name="ngay" ColumnName="ngay" />
-                </MappingFragment>
+                <ScalarProperty Name="gio" ColumnName="gio" />
+                <ScalarProperty Name="phong" ColumnName="phong" />
+                <ScalarProperty Name="maKH" ColumnName="maKH" />
+                <ScalarProperty Name="gioBatDau" ColumnName="gioBatDau" />
+                <ScalarProperty Name="gioKetThuc" ColumnName="gioKetThuc" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DiemDanh">
-            <EntityTypeMapping TypeName="SEPdataModel.DiemDanh">
+          <EntitySetMapping Name="DiemDanhs">
+            <EntityTypeMapping TypeName="sep21t21Model.DiemDanh">
               <MappingFragment StoreEntitySet="DiemDanh">
                 <ScalarProperty Name="maBH" ColumnName="maBH" />
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
@@ -436,8 +437,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GiangVien">
-            <EntityTypeMapping TypeName="SEPdataModel.GiangVien">
+          <EntitySetMapping Name="GiangViens">
+            <EntityTypeMapping TypeName="sep21t21Model.GiangVien">
               <MappingFragment StoreEntitySet="GiangVien">
                 <ScalarProperty Name="maGV" ColumnName="maGV" />
                 <ScalarProperty Name="tenTK" ColumnName="tenTK" />
@@ -447,8 +448,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KhoaHoc">
-            <EntityTypeMapping TypeName="SEPdataModel.KhoaHoc">
+          <EntitySetMapping Name="KhoaHocs">
+            <EntityTypeMapping TypeName="sep21t21Model.KhoaHoc">
               <MappingFragment StoreEntitySet="KhoaHoc">
                 <ScalarProperty Name="maKH" ColumnName="maKH" />
                 <ScalarProperty Name="nienkhoa" ColumnName="nienkhoa" />
@@ -459,16 +460,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MonHoc">
-            <EntityTypeMapping TypeName="SEPdataModel.MonHoc">
+          <EntitySetMapping Name="MonHocs">
+            <EntityTypeMapping TypeName="sep21t21Model.MonHoc">
               <MappingFragment StoreEntitySet="MonHoc">
                 <ScalarProperty Name="maMH" ColumnName="maMH" />
                 <ScalarProperty Name="tenMH" ColumnName="tenMH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SinhVien">
-            <EntityTypeMapping TypeName="SEPdataModel.SinhVien">
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="sep21t21Model.SinhVien">
               <MappingFragment StoreEntitySet="SinhVien">
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="gioiTinh" ColumnName="gioiTinh" />
@@ -480,7 +481,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SEPdataModel.sysdiagrams">
+            <EntityTypeMapping TypeName="sep21t21Model.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -490,7 +491,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="GiangDay" TypeName="SEPdataModel.GiangDay" StoreEntitySet="GiangDay">
+          <AssociationSetMapping Name="GiangDay" TypeName="sep21t21Model.GiangDay" StoreEntitySet="GiangDay">
             <EndProperty Name="GiangVien">
               <ScalarProperty Name="maGV" ColumnName="maGV" />
             </EndProperty>
@@ -498,7 +499,7 @@
               <ScalarProperty Name="maMH" ColumnName="maMH" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="sv_kh" TypeName="SEPdataModel.sv_kh" StoreEntitySet="sv_kh">
+          <AssociationSetMapping Name="sv_kh" TypeName="sep21t21Model.sv_kh" StoreEntitySet="sv_kh">
             <EndProperty Name="KhoaHoc">
               <ScalarProperty Name="maKH" ColumnName="maKH" />
             </EndProperty>
@@ -520,7 +521,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

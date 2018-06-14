@@ -7,14 +7,14 @@ namespace SEP_Team1.Models
 {
     public class DAO
     {
-        SEPdataEntities db = null;
+        sep21t21Entities db = null;
         public DAO()
         {
-            db = new SEPdataEntities();
+            db = new sep21t21Entities();
         }
         public string attendanceSV(SinhVien entity)
         {
-            db.SinhVien.Add(entity);
+            db.SinhViens.Add(entity);
             db.SaveChanges();
             return entity.MSSV;
         }

@@ -13,10 +13,10 @@ namespace SEP_Team1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SEPdataEntities : DbContext
+    public partial class sep21t21Entities : DbContext
     {
-        public SEPdataEntities()
-            : base("name=SEPdataEntities")
+        public sep21t21Entities()
+            : base("name=sep21t21Entities")
         {
         }
     
@@ -25,12 +25,12 @@ namespace SEP_Team1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BangBuoiHoc> BangBuoiHoc { get; set; }
-        public virtual DbSet<DiemDanh> DiemDanh { get; set; }
-        public virtual DbSet<GiangVien> GiangVien { get; set; }
-        public virtual DbSet<KhoaHoc> KhoaHoc { get; set; }
-        public virtual DbSet<MonHoc> MonHoc { get; set; }
-        public virtual DbSet<SinhVien> SinhVien { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<BangBuoiHoc> BangBuoiHocs { get; set; }
+        public virtual DbSet<DiemDanh> DiemDanhs { get; set; }
+        public virtual DbSet<GiangVien> GiangViens { get; set; }
+        public virtual DbSet<KhoaHoc> KhoaHocs { get; set; }
+        public virtual DbSet<MonHoc> MonHocs { get; set; }
+        public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

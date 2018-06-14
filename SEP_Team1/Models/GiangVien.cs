@@ -17,7 +17,7 @@ namespace SEP_Team1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GiangVien()
         {
-            this.MonHoc = new HashSet<MonHoc>();
+            this.MonHocs = new HashSet<MonHoc>();
         }
     
         public string maGV { get; set; }
@@ -27,6 +27,6 @@ namespace SEP_Team1.Models
         public Nullable<System.DateTime> ngaySinh { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MonHoc> MonHoc { get; set; }
+        public virtual ICollection<MonHoc> MonHocs { get; set; }
     }
 }

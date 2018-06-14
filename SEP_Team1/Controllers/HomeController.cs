@@ -9,15 +9,15 @@ namespace SEP_Team1.Controllers
 {
     public class HomeController : Controller
     {
-        SEPdataEntities db = new SEPdataEntities();
+        sep21t21Entities db = new sep21t21Entities();
         public ActionResult Index()
         {
             string maGV = Session["MaGV"] as string;
-            var monhoc = db.MonHoc.Where(mh => mh.GiangVien.Count(gv => gv.maGV == maGV) > 0).ToList();
+            var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
             var maMH = monhoc.Select(mh=>mh.maMH).ToList();
-            var khoahoc = db.KhoaHoc.Where(kh=>maMH.Contains(kh.maMH)).ToList();
+            var khoahoc = db.KhoaHocs.Where(kh=>maMH.Contains(kh.maMH)).ToList();
             var maKH = khoahoc.Select(kh => kh.maKH);
-            var buoihoc = db.BangBuoiHoc.Where(bh=>maKH.Contains(bh.maKH)).ToList();
+            var buoihoc = db.BangBuoiHocs.Where(bh=>maKH.Contains(bh.maKH)).ToList();
             ViewBag.Days = buoihoc.Count();
             ViewBag.nKhoaHoc = khoahoc.Count();
             ViewBag.Lesson = khoahoc;
@@ -27,28 +27,28 @@ namespace SEP_Team1.Controllers
         public ActionResult Course(string id)
         {
             string maGV = Session["MaGV"] as string;
-            var monhoc = db.MonHoc.Where(mh => mh.GiangVien.Count(gv => gv.maGV == maGV) > 0).ToList();
+            var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
             ViewBag.Subject = monhoc;          
-            var ikhoahoc = db.KhoaHoc.Where(kh => kh.maMH == id).ToList();
+            var ikhoahoc = db.KhoaHocs.Where(kh => kh.maMH == id).ToList();
             var maKH = ikhoahoc.Select(kh => kh.maKH);
             ViewBag.iLesson = ikhoahoc;
-            var buoihoc = db.BangBuoiHoc.Where(bh => maKH.Contains(bh.maKH)).ToList();
+            var buoihoc = db.BangBuoiHocs.Where(bh => maKH.Contains(bh.maKH)).ToList();
             ViewBag.Classes = buoihoc.Count();
-            var sinhvien = db.SinhVien.ToList();
+            var sinhvien = db.SinhViens.ToList();
             ViewBag.Student = sinhvien.Count();
             return View();
         }
         public ActionResult Attendance(string id)
         {
             string maGV = Session["MaGV"] as string;
-            var monhoc = db.MonHoc.Where(mh => mh.GiangVien.Count(gv => gv.maGV == maGV) > 0).ToList();
-            var sinhvien = db.SinhVien.Where(sv => sv.KhoaHoc.Count(kh => kh.maKH == id) > 0).ToList();
-            var buoihoc = db.BangBuoiHoc.Where(bh =>bh.maKH == id).ToList();
+            var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
+            var sinhvien = db.SinhViens.Where(sv => sv.KhoaHocs.Count(kh => kh.maKH == id) > 0).ToList();
+            var buoihoc = db.BangBuoiHocs.Where(bh =>bh.maKH == id).ToList();
 
             var mabuoihoc = buoihoc.Select(mh => mh.maBH).ToArray();
             string mbh = mabuoihoc[0];
 
-            var diemdanh = db.DiemDanh.Where(dd => dd.maBH == mbh);
+            var diemdanh = db.DiemDanhs.Where(dd => dd.maBH == mbh);
             var model = new DAO();
 
             if (ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace SEP_Team1.Controllers
 
                     if (at.diemDanh1 == true)
                     {
-                        db.DiemDanh.Add(new DiemDanh
+                        db.DiemDanhs.Add(new DiemDanh
                         {
                             MSSV = (string)at.MSSV
 
@@ -88,13 +88,13 @@ namespace SEP_Team1.Controllers
             string maGV = Session["MaGV"] as string;
 
             var Fch = Request.Form.AllKeys.Where(k => k != "bhoc");
-            db.DiemDanh.RemoveRange(db.DiemDanh.Where(d => d.maBH == bhoc));
+            db.DiemDanhs.RemoveRange(db.DiemDanhs.Where(d => d.maBH == bhoc));
             db.SaveChanges();
              
             foreach (var fea in Fch )
             {
                 {
-                    db.DiemDanh.Add(new DiemDanh
+                    db.DiemDanhs.Add(new DiemDanh
                     {
                         maBH = bhoc,
                         MSSV = fea,
@@ -104,9 +104,9 @@ namespace SEP_Team1.Controllers
                 }
             }
             db.SaveChanges();
-            var monhoc = db.MonHoc.Where(mh => mh.GiangVien.Count(gv => gv.maGV == maGV) > 0).ToList();
+            var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
           
-            var diemdanh = db.DiemDanh.Include("SinhVien").Include("BangBuoiHoc").Where(dd => dd.maBH == bhoc);
+            var diemdanh = db.DiemDanhs.Include("SinhVien").Include("BangBuoiHoc").Where(dd => dd.maBH == bhoc);
        
 
 
@@ -124,7 +124,7 @@ namespace SEP_Team1.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var user = db.GiangVien.FirstOrDefault(x => x.tenTK == username);
+            var user = db.GiangViens.FirstOrDefault(x => x.tenTK == username);
             if (user != null)
             {
                 if (user.password.Equals(password))
@@ -149,13 +149,13 @@ namespace SEP_Team1.Controllers
         }
        public ActionResult StudentProfile(string id )
         {
-            var studentInfo = db.SinhVien.FirstOrDefault(x=>x.MSSV == id);
+            var studentInfo = db.SinhViens.FirstOrDefault(x=>x.MSSV == id);
             return View(studentInfo);
         }
         public ActionResult Enrollment()
         {
             string maGV = Session["MaGV"] as string;
-            var monhoc = db.MonHoc.Where(mh => mh.GiangVien.Count(gv => gv.maGV == maGV) > 0).ToList();
+            var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
             return View();
         }
 

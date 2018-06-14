@@ -9,10 +9,10 @@ namespace SEP_Team1.Models.Dao
 {
     public class CourseDao
     {
-        SEPdataEntities db = null;
+        sep21t21Entities db = null;
         public CourseDao()
         {
-            db = new SEPdataEntities();
+            db = new sep21t21Entities();
         }
 
        

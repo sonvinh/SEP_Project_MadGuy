@@ -17,8 +17,8 @@ namespace SEP_Team1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhoaHoc()
         {
-            this.SinhVien = new HashSet<SinhVien>();
-            this.BangBuoiHoc = new HashSet<BangBuoiHoc>();
+            this.BangBuoiHocs = new HashSet<BangBuoiHoc>();
+            this.SinhViens = new HashSet<SinhVien>();
         }
     
         public string maKH { get; set; }
@@ -28,10 +28,10 @@ namespace SEP_Team1.Models
         public string maMH { get; set; }
         public Nullable<int> sobuoihoc { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BangBuoiHoc> BangBuoiHocs { get; set; }
         public virtual MonHoc MonHoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SinhVien> SinhVien { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BangBuoiHoc> BangBuoiHoc { get; set; }
+        public virtual ICollection<SinhVien> SinhViens { get; set; }
     }
 }

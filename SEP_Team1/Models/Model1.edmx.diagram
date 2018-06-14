@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ecf04f526404bad8fc1527ee1ef4874" Name="Diagram1">
-        <EntityTypeShape EntityType="SEPdataModel.BangBuoiHoc" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.DiemDanh" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.GiangVien" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.KhoaHoc" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.MonHoc" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.SinhVien" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEPdataModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="SEPdataModel.FK_DiemDanh_BuoiHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="SEPdataModel.FK_KhoaHoc_MonHoc" ManuallyRouted="false" />
-        <AssociationConnector Association="SEPdataModel.GiangDay" ManuallyRouted="false" />
-        <AssociationConnector Association="SEPdataModel.sv_kh" ManuallyRouted="false" />
-        <AssociationConnector Association="SEPdataModel.FK_BangBuoiHoc_KhoaHoc" />
-        <AssociationConnector Association="SEPdataModel.FK_DiemDanh_SinhVien" />
+      <Diagram DiagramId="134f9d343dee486ca40469cfaef563ab" Name="Diagram1">
+        <EntityTypeShape EntityType="sep21t21Model.BangBuoiHoc" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.DiemDanh" Width="1.5" PointX="9.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.GiangVien" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.KhoaHoc" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.MonHoc" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.SinhVien" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="sep21t21Model.FK_BangBuoiHoc_KhoaHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="sep21t21Model.FK_DiemDanh_BangBuoiHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="sep21t21Model.FK_DiemDanh_SinhVien" ManuallyRouted="false" />
+        <AssociationConnector Association="sep21t21Model.FK_KhoaHoc_MonHoc" ManuallyRouted="false" />
+        <AssociationConnector Association="sep21t21Model.GiangDay" ManuallyRouted="false" />
+        <AssociationConnector Association="sep21t21Model.sv_kh" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

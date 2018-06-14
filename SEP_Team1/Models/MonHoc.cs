@@ -17,16 +17,16 @@ namespace SEP_Team1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MonHoc()
         {
-            this.KhoaHoc = new HashSet<KhoaHoc>();
-            this.GiangVien = new HashSet<GiangVien>();
+            this.KhoaHocs = new HashSet<KhoaHoc>();
+            this.GiangViens = new HashSet<GiangVien>();
         }
     
         public string maMH { get; set; }
         public string tenMH { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KhoaHoc> KhoaHoc { get; set; }
+        public virtual ICollection<KhoaHoc> KhoaHocs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GiangVien> GiangVien { get; set; }
+        public virtual ICollection<GiangVien> GiangViens { get; set; }
     }
 }
