@@ -1,0 +1,242 @@
+﻿@model SEP_Team1.Models.KhoaHoc
+
+@{
+    
+    var ilesson = (List<SEP_Team1.Models.KhoaHoc>)ViewBag.iLesson;
+    var ilessoncount = ilesson.Count();
+    ViewBag.Title = "Course";
+}
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-12">
+            <h4 class="text-white">Minimal Dashboard</h4>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">Minimal Dashboard</li>
+            </ol>
+        </div>
+        <div class="col-md-6 text-right">
+            <form class="app-search d-none d-md-block d-lg-block">
+                <input type="text" class="form-control" placeholder="Search &amp; enter">
+            </form>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h3><i class="icon-book-open"></i></h3>
+                                <p class="text-muted">Courses</p>
+                            </div>
+                            <div class="ml-auto">
+                                <h2 class="counter text-purple">@ilessoncount</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-purple" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h3><i class="icon-note"></i></h3>
+                                <p class="text-muted">Classes</p>
+                            </div>
+                            <div class="ml-auto">
+                                <h2 class="counter text-cyan">@ViewBag.Classes</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-cyan" role="progressbar" style="width:100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+  
+        <!-- Column -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex no-block align-items-center">
+                            <div>
+                                <h3><i class="icon-bag"></i></h3>
+                                <p class="text-muted">Students</p>
+                            </div>
+                            <div class="ml-auto">
+                                <h2 class="counter text-success">@ViewBag.Student</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Over Visitor, Our income , slaes different and  sales prediction -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- ============================================================== -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <section class="cd-horizontal-timeline">
+                        <div class="timeline">
+                            <div class="events-wrapper">
+                                <div class="events">
+                                    <ol>
+                                        <li><a href="#0" data-date="16/01/2014" class="selected">16 Jan</a></li>
+                                        <li><a href="#0" data-date="28/02/2014">28 Feb</a></li>
+                                        <li><a href="#0" data-date="20/04/2014">20 Mar</a></li>
+                                        <li><a href="#0" data-date="20/05/2014">20 May</a></li>
+                                        <li><a href="#0" data-date="09/07/2014">09 Jul</a></li>
+                                        <li><a href="#0" data-date="30/08/2014">30 Aug</a></li>
+                                        <li><a href="#0" data-date="15/09/2014">15 Sep</a></li>
+                                        <li><a href="#0" data-date="01/11/2014">01 Nov</a></li>
+                                        <li><a href="#0" data-date="10/12/2014">10 Dec</a></li>
+                                        <li><a href="#0" data-date="19/01/2015">29 Jan</a></li>
+                                        <li><a href="#0" data-date="03/03/2015">3 Mar</a></li>
+                                    </ol>
+                                    <span class="filling-line" aria-hidden="true"></span>
+                                </div>
+                                <!-- .events -->
+                            </div>
+                            <!-- .events-wrapper -->
+                            <ul class="cd-timeline-navigation">
+                                <li><a href="#0" class="prev inactive">Prev</a></li>
+                                <li><a href="#0" class="next">Next</a></li>
+                            </ul>
+                            <!-- .cd-timeline-navigation -->
+                        </div>
+                        <!-- .timeline -->
+                        <div class="events-content">
+                            <ol>
+                                <li class="selected" data-date="16/01/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/1.jpg" alt="user"> Horizontal Timeline<br /><small>January 16th, 2014</small></h2>
+                                </li>
+                                <li data-date="28/02/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/8.jpg" alt="user"> Horizontal Timeline<br /><small>Feb 28th, 2014</small></h2>
+                                </li>
+                                <li data-date="20/04/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/7.jpg" alt="user"> Horizontal Timeline<br /><small>March 20th, 2014</small></h2>
+                                </li>
+                                <li data-date="20/05/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/6.jpg" alt="user"> Horizontal Timeline<br /><small>May 20th, 2014</small></h2>
+                                </li>
+                                <li data-date="09/07/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/5.jpg" alt="user"> Horizontal Timeline<br /><small>July 9th, 2014</small></h2>
+
+                                </li>
+                                <li data-date="30/08/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/4.jpg" alt="user"> Horizontal Timeline<br /><small>August 30th, 2014</small></h2>
+
+                                </li>
+                                <li data-date="15/09/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/3.jpg" alt="user"> Horizontal Timeline<br /><small>September 15th, 2014</small></h2>
+
+                                </li>
+                                <li data-date="01/11/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/2.jpg" alt="user"> Horizontal Timeline<br /><small>November 01st, 2014</small></h2>
+                                </li>
+                                <li data-date="10/12/2014">
+                                    <h2><img class="img-circle pull-left m-r-20 m-b-10" width="60" alt="user" src="/Content/Admin/assets/images/users/1.jpg" alt="user"> Horizontal Timeline<br /><small>December 10th, 2014</small></h2>
+                                </li>
+                                <li data-date="19/01/2015">
+                                    <h2>Event title here</h2>
+                                </li>
+                                <li data-date="03/03/2015">
+                                    <h2>Event title here</h2>
+                                </li>
+                            </ol>
+                        </div>
+                        <!-- .events-content -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <h6 class="card-subtitle">Courses</h6>
+                    <div class="table-responsive">
+                        <table class="table color-table primary-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Course</th>
+                                    <th>School Year</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Status</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in ilesson)
+                                {
+                                   
+                                <tr>
+                                    @{
+                                    DateTime start = Convert.ToDateTime(item.ngaybatdau);
+                                    DateTime end = Convert.ToDateTime(item.ngayketthuc);
+                                    string st = start.ToString("dd/MM/yyyy");
+                                    string en = end.ToString("dd/MM/yyyy");
+
+                                    }
+                                    <td><a href="/Home/Attendance/@item.maKH">@item.maKH</td>
+                                    <td>@item.nienkhoa</td>
+                                    <td>@st</td>
+                                    <td>@en</td>
+                                    <td> </td>
+                                    <td> </td>
+                               
+                                </tr>
+}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <!-- ============================================================== -->
+</div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->

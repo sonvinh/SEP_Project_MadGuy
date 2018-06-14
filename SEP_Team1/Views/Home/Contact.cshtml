@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SEP_Team1.Models.MonHoc>
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<h2>Contact</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tenMH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenMH)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.maMH }) |
+            @Html.ActionLink("Details", "Details", new { id=item.maMH }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.maMH })
+        </td>
+    </tr>
+}
+
+</table>

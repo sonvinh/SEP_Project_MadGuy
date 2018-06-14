@@ -1,0 +1,50 @@
+﻿@model SEP_Team1.Models.SinhVien
+
+@{
+    ViewBag.Title = "About";
+}
+
+<h2>About</h2>
+
+<div>
+    <h4>SinhVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaySinh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MSSV }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
