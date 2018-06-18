@@ -14,10 +14,13 @@ namespace SEP_Team1.Models
     
     public partial class DiemDanh
     {
+        public int Id { get; set; }
         public string maBH { get; set; }
+        public string MaKH { get; set; }
         public string MSSV { get; set; }
+        public System.DateTime Date { get; set; }
+        public System.TimeSpan Time { get; set; }
         public bool diemDanh1 { get; set; }
-        public string note { get; set; }
     
         public virtual BangBuoiHoc BangBuoiHoc { get; set; }
         public virtual SinhVien SinhVien { get; set; }

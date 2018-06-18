@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\APIConnect.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -157,8 +158,6 @@
     <Compile Include="Models\BangBuoiHoc.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DAO.cs" />
-    <Compile Include="Models\Dao\CourseDao.cs" />
     <Compile Include="Models\DiemDanh.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -189,6 +188,7 @@
     <Compile Include="Models\SinhVien.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentAPI.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

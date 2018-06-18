@@ -22,11 +22,13 @@ namespace SEP_Team1.Models
         }
     
         public string MSSV { get; set; }
-        public Nullable<bool> gioiTinh { get; set; }
-        public string ho { get; set; }
-        public string ten { get; set; }
-        public Nullable<System.DateTime> ngaySinh { get; set; }
-        public string mavantay { get; set; }
+        public string fullname { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string finger { get; set; }
+        public string maKH { get; set; }
+        public Nullable<bool> gender { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DiemDanh> DiemDanhs { get; set; }

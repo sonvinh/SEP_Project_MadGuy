@@ -80,9 +80,9 @@
                                         {
                                             <tr>
                                                 <td><a href="/Home/StudentProfile/@item.MSSV"/>@item.MSSV</td>
-                                                <td>@item.SinhVien.ho</td>
-                                                <td>@item.SinhVien.ten</td>
-                                                @if (item.SinhVien.gioiTinh == true)
+                                                <td>@item.SinhVien.firstname</td>
+                                                <td>@item.SinhVien.lastname</td>
+                                                @if (item.SinhVien.gender == true)
                                                 {
                                                     <td>Nữ</td>
                                                 }
@@ -92,9 +92,8 @@
                                                 }
 
                                                 @{
-                                                    DateTime dt = Convert.ToDateTime(item.SinhVien.ngaySinh);
+                                                    DateTime dt = Convert.ToDateTime(item.SinhVien.birthday);
                                                     string nt = dt.ToString("dd/MM/yyyy");
-
                                                 }
                                                 <td>@nt</td>
                                                 <!-- xu li diem danh-->

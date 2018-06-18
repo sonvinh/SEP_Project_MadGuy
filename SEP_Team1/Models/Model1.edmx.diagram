@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="134f9d343dee486ca40469cfaef563ab" Name="Diagram1">
-        <EntityTypeShape EntityType="sep21t21Model.BangBuoiHoc" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="sep21t21Model.DiemDanh" Width="1.5" PointX="9.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="sep21t21Model.GiangVien" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="sep21t21Model.KhoaHoc" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sep21t21Model.MonHoc" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sep21t21Model.SinhVien" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+      <Diagram DiagramId="b8f1224f1447472ebbd8e6cd881224a9" Name="Diagram1">
+        <EntityTypeShape EntityType="sep21t21Model.BangBuoiHoc" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.DiemDanh" Width="1.5" PointX="9.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.GiangVien" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.KhoaHoc" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.MonHoc" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sep21t21Model.SinhVien" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="sep21t21Model.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <AssociationConnector Association="sep21t21Model.FK_BangBuoiHoc_KhoaHoc" ManuallyRouted="false" />
         <AssociationConnector Association="sep21t21Model.FK_DiemDanh_BangBuoiHoc" ManuallyRouted="false" />

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SEP_Team1.Models;
+using SEP_Team1.API;
 
 namespace SEP_Team1.Controllers
 {
     public class HomeController : Controller
     {
         sep21t21Entities db = new sep21t21Entities();
+        APIConnect connect = new APIConnect();
         public ActionResult Index()
         {
             string maGV = Session["MaGV"] as string;
@@ -40,6 +42,50 @@ namespace SEP_Team1.Controllers
         }
         public ActionResult Attendance(string id)
         {
+            var item = connect.GetStudent(id);
+            
+            // xử lí lưu dsach svien API
+            if (db.SinhViens.Where(s => s.maKH == id).Count() == 0)
+            {
+                foreach (var svien in item)
+                {
+                    SinhVien stu = new SinhVien();
+                    stu.fullname = svien.fullname;
+                    stu.lastname = svien.lastname;
+                    stu.firstname = svien.firstname;
+                    stu.birthday = Convert.ToDateTime(svien.birthday);
+                    stu.MSSV = svien.id;
+                    stu.maKH = id;
+                    db.SinhViens.Add(stu);
+                    db.SaveChanges();
+                }
+            }
+            // xử lí lưu vào bang điểm danh
+            foreach (var at in item)
+            {
+                DiemDanh atten = new DiemDanh();
+                if (id == "MH1")
+                {
+                    atten.maBH = "BHMH1001";
+                }
+                if (id == "MH2")
+                {
+                    atten.maBH = "BHMH2001";
+                }
+                if (id == "MH3")
+                {
+                    atten.maBH = "BHMH3001";
+                }
+                atten.MaKH = id;
+                atten.MSSV = at.id;
+                atten.Date = DateTime.Now.Date;
+                atten.Time = DateTime.Now.TimeOfDay;
+                atten.diemDanh1 = false;
+                db.DiemDanhs.Add(atten);
+                db.SaveChanges();
+            }
+
+
             string maGV = Session["MaGV"] as string;
             var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
             var sinhvien = db.SinhViens.Where(sv => sv.KhoaHocs.Count(kh => kh.maKH == id) > 0).ToList();
@@ -49,14 +95,12 @@ namespace SEP_Team1.Controllers
             string mbh = mabuoihoc[0];
 
             var diemdanh = db.DiemDanhs.Where(dd => dd.maBH == mbh);
-            var model = new DAO();
+          
 
             if (ModelState.IsValid)
-            {
-             
+            {       
                 foreach (var at in diemdanh)
                 {
-
                     if (at.diemDanh1 == true)
                     {
                         db.DiemDanhs.Add(new DiemDanh
@@ -66,31 +110,24 @@ namespace SEP_Team1.Controllers
                         });
                     }
                 }
-
             }
-
-
-
-                ViewBag.Student = sinhvien;
+            ViewBag.Student = sinhvien;
             ViewBag.Diemdanh = diemdanh.ToList();
             ViewBag.CountStudent = sinhvien.Count();
             ViewBag.Buoihoc = buoihoc;
             ViewBag.Subject = monhoc;
             return View();
-
         }
 
         [HttpPost]
         public ActionResult Check(string bhoc)
         {
-            var model = new DAO();
-     
             string maGV = Session["MaGV"] as string;
 
             var Fch = Request.Form.AllKeys.Where(k => k != "bhoc");
             db.DiemDanhs.RemoveRange(db.DiemDanhs.Where(d => d.maBH == bhoc));
             db.SaveChanges();
-             
+            
             foreach (var fea in Fch )
             {
                 {
@@ -99,7 +136,6 @@ namespace SEP_Team1.Controllers
                         maBH = bhoc,
                         MSSV = fea,
                         diemDanh1 = Request.Form[fea] != "false"
-                        
                     });
                 }
             }
@@ -107,15 +143,11 @@ namespace SEP_Team1.Controllers
             var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
           
             var diemdanh = db.DiemDanhs.Include("SinhVien").Include("BangBuoiHoc").Where(dd => dd.maBH == bhoc);
-       
-
-
 
             ViewBag.Diemdanh = diemdanh.ToList();
  
             ViewBag.Subject = monhoc;
             return PartialView(diemdanh.ToList());
-
         }
         public ActionResult Login()
         {
@@ -158,8 +190,5 @@ namespace SEP_Team1.Controllers
             var monhoc = db.MonHocs.Where(mh => mh.GiangViens.Count(gv => gv.maGV == maGV) > 0).ToList();
             return View();
         }
-
-
-      
     }
 }

@@ -23,10 +23,9 @@ namespace SEP_Team1.Models
     
         public string maKH { get; set; }
         public string nienkhoa { get; set; }
-        public System.DateTime ngaybatdau { get; set; }
-        public System.DateTime ngayketthuc { get; set; }
+        public Nullable<System.DateTime> ngaybatdau { get; set; }
+        public Nullable<System.DateTime> ngayketthuc { get; set; }
         public string maMH { get; set; }
-        public Nullable<int> sobuoihoc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BangBuoiHoc> BangBuoiHocs { get; set; }

@@ -21,12 +21,10 @@ namespace SEP_Team1.Models
         }
     
         public string maBH { get; set; }
-        public Nullable<System.DateTime> ngay { get; set; }
-        public Nullable<System.TimeSpan> gio { get; set; }
-        public string phong { get; set; }
         public string maKH { get; set; }
-        public Nullable<System.TimeSpan> gioBatDau { get; set; }
-        public Nullable<System.TimeSpan> gioKetThuc { get; set; }
+        public string day { get; set; }
+        public Nullable<System.TimeSpan> time { get; set; }
+        public string room { get; set; }
     
         public virtual KhoaHoc KhoaHoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

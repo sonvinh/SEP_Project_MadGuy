@@ -4,28 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="sep21t21Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="sep21t21Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BangBuoiHoc">
           <Key>
             <PropertyRef Name="maBH" />
           </Key>
           <Property Name="maBH" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="ngay" Type="date" />
-          <Property Name="gio" Type="time" Precision="2" />
-          <Property Name="phong" Type="nvarchar" MaxLength="5" />
-          <Property Name="maKH" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="gioBatDau" Type="time" Precision="2" />
-          <Property Name="gioKetThuc" Type="time" Precision="2" />
+          <Property Name="maKH" Type="nchar" MaxLength="20" />
+          <Property Name="day" Type="nvarchar" MaxLength="50" />
+          <Property Name="time" Type="time" Precision="2" />
+          <Property Name="room" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="DiemDanh">
           <Key>
-            <PropertyRef Name="maBH" />
-            <PropertyRef Name="MSSV" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="maBH" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="MSSV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaKH" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="diemDanh" Type="bit" Nullable="false" />
-          <Property Name="note" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="GiangDay">
           <Key>
@@ -33,13 +33,13 @@
             <PropertyRef Name="maGV" />
           </Key>
           <Property Name="maMH" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="maGV" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="maGV" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="GiangVien">
           <Key>
             <PropertyRef Name="maGV" />
           </Key>
-          <Property Name="maGV" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="maGV" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="tenTK" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="20" />
           <Property Name="hoten" Type="nvarchar" MaxLength="50" />
@@ -49,38 +49,39 @@
           <Key>
             <PropertyRef Name="maKH" />
           </Key>
-          <Property Name="maKH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="maKH" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="nienkhoa" Type="nvarchar" MaxLength="20" />
-          <Property Name="ngaybatdau" Type="date" Nullable="false" />
-          <Property Name="ngayketthuc" Type="date" Nullable="false" />
+          <Property Name="ngaybatdau" Type="date" />
+          <Property Name="ngayketthuc" Type="date" />
           <Property Name="maMH" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="sobuoihoc" Type="int" />
         </EntityType>
         <EntityType Name="MonHoc">
           <Key>
             <PropertyRef Name="maMH" />
           </Key>
           <Property Name="maMH" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="tenMH" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tenMH" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
             <PropertyRef Name="MSSV" />
           </Key>
-          <Property Name="MSSV" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="gioiTinh" Type="bit" />
-          <Property Name="ho" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ten" Type="nvarchar" MaxLength="50" />
-          <Property Name="ngaySinh" Type="datetime" />
-          <Property Name="mavantay" Type="nvarchar(max)" />
+          <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="300" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="finger" Type="nvarchar(max)" />
+          <Property Name="maKH" Type="nchar" MaxLength="10" />
+          <Property Name="gender" Type="bit" />
         </EntityType>
         <EntityType Name="sv_kh">
           <Key>
             <PropertyRef Name="maKH" />
             <PropertyRef Name="MSSV" />
           </Key>
-          <Property Name="maKH" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MSSV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="maKH" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -93,7 +94,7 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_BangBuoiHoc_KhoaHoc">
-          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="0..1" />
           <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KhoaHoc">
@@ -128,7 +129,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GiangDay_GiangVien">
+        <Association Name="FK_KhoaHoc_MonHoc">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="maMH" />
+            </Principal>
+            <Dependent Role="KhoaHoc">
+              <PropertyRef Name="maMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mh&amp;gv_GiangVien">
           <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="1" />
           <End Role="GiangDay" Type="Self.GiangDay" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GiangDay_MonHoc">
+        <Association Name="FK_mh&amp;gv_MonHoc">
           <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
           <End Role="GiangDay" Type="Self.GiangDay" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,18 +161,6 @@
               <PropertyRef Name="maMH" />
             </Principal>
             <Dependent Role="GiangDay">
-              <PropertyRef Name="maMH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KhoaHoc_MonHoc">
-          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
-          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MonHoc">
-              <PropertyRef Name="maMH" />
-            </Principal>
-            <Dependent Role="KhoaHoc">
               <PropertyRef Name="maMH" />
             </Dependent>
           </ReferentialConstraint>
@@ -210,17 +211,17 @@
             <End Role="SinhVien" EntitySet="SinhVien" />
             <End Role="DiemDanh" EntitySet="DiemDanh" />
           </AssociationSet>
-          <AssociationSet Name="FK_GiangDay_GiangVien" Association="Self.FK_GiangDay_GiangVien">
-            <End Role="GiangVien" EntitySet="GiangVien" />
-            <End Role="GiangDay" EntitySet="GiangDay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GiangDay_MonHoc" Association="Self.FK_GiangDay_MonHoc">
-            <End Role="MonHoc" EntitySet="MonHoc" />
-            <End Role="GiangDay" EntitySet="GiangDay" />
-          </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_MonHoc" Association="Self.FK_KhoaHoc_MonHoc">
             <End Role="MonHoc" EntitySet="MonHoc" />
             <End Role="KhoaHoc" EntitySet="KhoaHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mh&amp;gv_GiangVien" Association="Self.FK_mh&amp;gv_GiangVien">
+            <End Role="GiangVien" EntitySet="GiangVien" />
+            <End Role="GiangDay" EntitySet="GiangDay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mh&amp;gv_MonHoc" Association="Self.FK_mh&amp;gv_MonHoc">
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="GiangDay" EntitySet="GiangDay" />
           </AssociationSet>
           <AssociationSet Name="FK_sv_kh_KhoaHoc" Association="Self.FK_sv_kh_KhoaHoc">
             <End Role="KhoaHoc" EntitySet="KhoaHoc" />
@@ -231,8 +232,7 @@
             <End Role="sv_kh" EntitySet="sv_kh" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="sep21t21Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -241,24 +241,24 @@
             <PropertyRef Name="maBH" />
           </Key>
           <Property Name="maBH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ngay" Type="DateTime" Precision="0" />
-          <Property Name="gio" Type="Time" Precision="2" />
-          <Property Name="phong" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="maKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gioBatDau" Type="Time" Precision="2" />
-          <Property Name="gioKetThuc" Type="Time" Precision="2" />
+          <Property Name="maKH" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time" Type="Time" Precision="2" />
+          <Property Name="room" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="BangBuoiHoc" ToRole="KhoaHoc" />
           <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="BangBuoiHoc" ToRole="DiemDanh" />
         </EntityType>
         <EntityType Name="DiemDanh">
           <Key>
-            <PropertyRef Name="maBH" />
-            <PropertyRef Name="MSSV" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="maBH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaKH" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="diemDanh1" Type="Boolean" Nullable="false" />
-          <Property Name="note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BangBuoiHoc" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="DiemDanh" ToRole="BangBuoiHoc" />
           <NavigationProperty Name="SinhVien" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="DiemDanh" ToRole="SinhVien" />
         </EntityType>
@@ -266,7 +266,7 @@
           <Key>
             <PropertyRef Name="maGV" />
           </Key>
-          <Property Name="maGV" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maGV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="tenTK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -277,12 +277,11 @@
           <Key>
             <PropertyRef Name="maKH" />
           </Key>
-          <Property Name="maKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maKH" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="nienkhoa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ngaybatdau" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ngayketthuc" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ngaybatdau" Type="DateTime" Precision="0" />
+          <Property Name="ngayketthuc" Type="DateTime" Precision="0" />
           <Property Name="maMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="sobuoihoc" Type="Int32" />
           <NavigationProperty Name="BangBuoiHocs" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="BangBuoiHoc" />
           <NavigationProperty Name="MonHoc" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="KhoaHoc" ToRole="MonHoc" />
           <NavigationProperty Name="SinhViens" Relationship="Self.sv_kh" FromRole="KhoaHoc" ToRole="SinhVien" />
@@ -292,7 +291,7 @@
             <PropertyRef Name="maMH" />
           </Key>
           <Property Name="maMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tenMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tenMH" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="KhoaHocs" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="MonHoc" ToRole="KhoaHoc" />
           <NavigationProperty Name="GiangViens" Relationship="Self.GiangDay" FromRole="MonHoc" ToRole="GiangVien" />
         </EntityType>
@@ -300,12 +299,14 @@
           <Key>
             <PropertyRef Name="MSSV" />
           </Key>
-          <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gioiTinh" Type="Boolean" />
-          <Property Name="ho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ngaySinh" Type="DateTime" Precision="3" />
-          <Property Name="mavantay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="fullname" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="finger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="gender" Type="Boolean" />
           <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="SinhVien" ToRole="DiemDanh" />
           <NavigationProperty Name="KhoaHocs" Relationship="Self.sv_kh" FromRole="SinhVien" ToRole="KhoaHoc" />
         </EntityType>
@@ -320,7 +321,7 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_BangBuoiHoc_KhoaHoc">
-          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="0..1" />
           <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KhoaHoc">
@@ -418,22 +419,23 @@
             <EntityTypeMapping TypeName="sep21t21Model.BangBuoiHoc">
               <MappingFragment StoreEntitySet="BangBuoiHoc">
                 <ScalarProperty Name="maBH" ColumnName="maBH" />
-                <ScalarProperty Name="ngay" ColumnName="ngay" />
-                <ScalarProperty Name="gio" ColumnName="gio" />
-                <ScalarProperty Name="phong" ColumnName="phong" />
                 <ScalarProperty Name="maKH" ColumnName="maKH" />
-                <ScalarProperty Name="gioBatDau" ColumnName="gioBatDau" />
-                <ScalarProperty Name="gioKetThuc" ColumnName="gioKetThuc" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="room" ColumnName="room" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DiemDanhs">
             <EntityTypeMapping TypeName="sep21t21Model.DiemDanh">
               <MappingFragment StoreEntitySet="DiemDanh">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="maBH" ColumnName="maBH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="diemDanh1" ColumnName="diemDanh" />
-                <ScalarProperty Name="note" ColumnName="note" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -456,7 +458,6 @@
                 <ScalarProperty Name="ngaybatdau" ColumnName="ngaybatdau" />
                 <ScalarProperty Name="ngayketthuc" ColumnName="ngayketthuc" />
                 <ScalarProperty Name="maMH" ColumnName="maMH" />
-                <ScalarProperty Name="sobuoihoc" ColumnName="sobuoihoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -472,11 +473,13 @@
             <EntityTypeMapping TypeName="sep21t21Model.SinhVien">
               <MappingFragment StoreEntitySet="SinhVien">
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
-                <ScalarProperty Name="gioiTinh" ColumnName="gioiTinh" />
-                <ScalarProperty Name="ho" ColumnName="ho" />
-                <ScalarProperty Name="ten" ColumnName="ten" />
-                <ScalarProperty Name="ngaySinh" ColumnName="ngaySinh" />
-                <ScalarProperty Name="mavantay" ColumnName="mavantay" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="finger" ColumnName="finger" />
+                <ScalarProperty Name="maKH" ColumnName="maKH" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
