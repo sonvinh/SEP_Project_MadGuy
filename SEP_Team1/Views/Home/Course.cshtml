@@ -1,7 +1,6 @@
 ﻿@model SEP_Team1.Models.KhoaHoc
 
 @{
-    
     var ilesson = (List<SEP_Team1.Models.KhoaHoc>)ViewBag.iLesson;
     var ilessoncount = ilesson.Count();
     ViewBag.Title = "Course";
@@ -16,12 +15,10 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-12">
-            <h4 class="text-white">Minimal Dashboard</h4>
+
         </div>
         <div class="col-md-6">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Minimal Dashboard</li>
             </ol>
         </div>
         <div class="col-md-6 text-right">
@@ -216,7 +213,6 @@
                                     DateTime end = Convert.ToDateTime(item.ngayketthuc);
                                     string st = start.ToString("dd/MM/yyyy");
                                     string en = end.ToString("dd/MM/yyyy");
-
                                     }
                                     <td><a href="/Home/Attendance/@item.maKH">@item.maKH</td>
                                     <td>@item.nienkhoa</td>
@@ -224,10 +220,8 @@
                                     <td>@en</td>
                                     <td> </td>
                                     <td> </td>
-                               
                                 </tr>
-}
-
+                                  }
                             </tbody>
                         </table>
                     </div>

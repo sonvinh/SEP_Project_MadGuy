@@ -29,8 +29,10 @@ namespace SEP_Team1.Models
         public virtual DbSet<DiemDanh> DiemDanhs { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
         public virtual DbSet<KhoaHoc> KhoaHocs { get; set; }
+        public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<MonHoc> MonHocs { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<sv_kh> sv_kh { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

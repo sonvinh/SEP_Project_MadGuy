@@ -21,8 +21,6 @@ namespace SEP_Team1.Models
         public System.DateTime Date { get; set; }
         public System.TimeSpan Time { get; set; }
         public bool diemDanh1 { get; set; }
-    
-        public virtual BangBuoiHoc BangBuoiHoc { get; set; }
-        public virtual SinhVien SinhVien { get; set; }
+        public Nullable<int> sessionID { get; set; }
     }
 }

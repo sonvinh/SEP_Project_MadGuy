@@ -18,7 +18,7 @@ namespace SEP_Team1.Models
         public KhoaHoc()
         {
             this.BangBuoiHocs = new HashSet<BangBuoiHoc>();
-            this.SinhViens = new HashSet<SinhVien>();
+            this.sv_kh = new HashSet<sv_kh>();
         }
     
         public string maKH { get; set; }
@@ -31,6 +31,6 @@ namespace SEP_Team1.Models
         public virtual ICollection<BangBuoiHoc> BangBuoiHocs { get; set; }
         public virtual MonHoc MonHoc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SinhVien> SinhViens { get; set; }
+        public virtual ICollection<sv_kh> sv_kh { get; set; }
     }
 }

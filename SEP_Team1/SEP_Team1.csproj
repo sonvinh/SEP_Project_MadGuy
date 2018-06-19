@@ -164,7 +164,11 @@
     <Compile Include="Models\GiangVien.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GiangVienAPI.cs" />
     <Compile Include="Models\KhoaHoc.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -189,6 +193,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentAPI.cs" />
+    <Compile Include="Models\sv_kh.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -5439,11 +5446,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Attendance.cshtml" />
     <Content Include="Views\Home\Course.cshtml" />
-    <Content Include="Views\Home\Enrollment.cshtml" />
     <Content Include="Views\Home\Check.cshtml" />
+    <Content Include="Views\Home\ListStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

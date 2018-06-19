@@ -14,13 +14,6 @@ namespace SEP_Team1.Models
     
     public partial class SinhVien
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SinhVien()
-        {
-            this.DiemDanhs = new HashSet<DiemDanh>();
-            this.KhoaHocs = new HashSet<KhoaHoc>();
-        }
-    
         public string MSSV { get; set; }
         public string fullname { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
@@ -28,11 +21,6 @@ namespace SEP_Team1.Models
         public string lastname { get; set; }
         public string finger { get; set; }
         public string maKH { get; set; }
-        public Nullable<bool> gender { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiemDanh> DiemDanhs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KhoaHoc> KhoaHocs { get; set; }
+        public int Id { get; set; }
     }
 }

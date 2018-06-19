@@ -15,7 +15,6 @@
             <th>ID Student</th>
             <th>Last Name</th>
             <th>First Name</th>
-            <th>Gender</th>
             <th>D.O.B</th>
             <th>Attendance</th>
         </tr>
@@ -23,29 +22,29 @@
     <tbody>
         @foreach (var item in diemdanh)
         {
-            <tr>
-                <td><a href="/Home/StudentProfile/@item.MSSV">@item.MSSV</td>
-                <td>@item.SinhVien.ho</td>
-                <td>@item.SinhVien.ten</td>
-                @if (item.SinhVien.gioiTinh == true)
+            foreach (var sv in students)
+            {
+                if (sv.MSSV == item.MSSV)
                 {
-                    <td>Nữ</td>
-                }
-                else
-                {
-                    <td>Nam</td>
-                }
+                    <tr>
+                        <td><a href="/Home/StudentProfile/@item.MSSV" />@item.MSSV</td>
+                        <td>@sv.firstname</td>
+                        <td>@sv.lastname</td>
 
-                @{
-                    DateTime dt = Convert.ToDateTime(item.SinhVien.ngaySinh);
-                    string nt = dt.ToString("dd/MM/yyyy");
-
-                }
-                <td>@nt</td>
-                <!-- xu li diem danh-->
-                <td>@Html.CheckBox(item.MSSV, item.diemDanh1, htmlAttributes: new { @id = "att" })</td>
-                <!-- -->
-            </tr>
-        }
+                        @{
+                            DateTime dt = Convert.ToDateTime(sv.birthday);
+                            string nt = dt.ToString("dd/MM/yyyy");
+                        }
+                        <td>@nt</td>
+                        <!-- xu li diem danh-->
+                        <td>
+                            @Html.CheckBox(item.MSSV, item.diemDanh1, htmlAttributes: new { @id = item.MSSV, @class = "bt-switch" })
+                        </td>
+                        <!-- -->
+                    </tr>
+                                    }
+                                }
+                            }
     </tbody>
+
 </table>

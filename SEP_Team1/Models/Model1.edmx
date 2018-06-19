@@ -14,6 +14,7 @@
           <Property Name="day" Type="nvarchar" MaxLength="50" />
           <Property Name="time" Type="time" Precision="2" />
           <Property Name="room" Type="nvarchar" MaxLength="5" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="DiemDanh">
           <Key>
@@ -26,6 +27,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="diemDanh" Type="bit" Nullable="false" />
+          <Property Name="sessionID" Type="int" />
         </EntityType>
         <EntityType Name="GiangDay">
           <Key>
@@ -55,6 +57,14 @@
           <Property Name="ngayketthuc" Type="date" />
           <Property Name="maMH" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFinger" Type="int" />
+          <Property Name="Uid" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="MonHoc">
           <Key>
             <PropertyRef Name="maMH" />
@@ -64,7 +74,7 @@
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
-            <PropertyRef Name="MSSV" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="fullname" Type="nvarchar" MaxLength="300" />
@@ -73,7 +83,7 @@
           <Property Name="lastname" Type="nvarchar" MaxLength="50" />
           <Property Name="finger" Type="nvarchar(max)" />
           <Property Name="maKH" Type="nchar" MaxLength="10" />
-          <Property Name="gender" Type="bit" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sv_kh">
           <Key>
@@ -102,30 +112,6 @@
             </Principal>
             <Dependent Role="BangBuoiHoc">
               <PropertyRef Name="maKH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiemDanh_BangBuoiHoc">
-          <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="1" />
-          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BangBuoiHoc">
-              <PropertyRef Name="maBH" />
-            </Principal>
-            <Dependent Role="DiemDanh">
-              <PropertyRef Name="maBH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiemDanh_SinhVien">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SinhVien">
-              <PropertyRef Name="MSSV" />
-            </Principal>
-            <Dependent Role="DiemDanh">
-              <PropertyRef Name="MSSV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -177,24 +163,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_sv_kh_SinhVien">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="sv_kh" Type="Self.sv_kh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SinhVien">
-              <PropertyRef Name="MSSV" />
-            </Principal>
-            <Dependent Role="sv_kh">
-              <PropertyRef Name="MSSV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="sep21t21ModelStoreContainer">
           <EntitySet Name="BangBuoiHoc" EntityType="Self.BangBuoiHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiemDanh" EntityType="Self.DiemDanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GiangDay" EntityType="Self.GiangDay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GiangVien" EntityType="Self.GiangVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhoaHoc" EntityType="Self.KhoaHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sv_kh" EntityType="Self.sv_kh" Schema="dbo" store:Type="Tables" />
@@ -202,14 +177,6 @@
           <AssociationSet Name="FK_BangBuoiHoc_KhoaHoc" Association="Self.FK_BangBuoiHoc_KhoaHoc">
             <End Role="KhoaHoc" EntitySet="KhoaHoc" />
             <End Role="BangBuoiHoc" EntitySet="BangBuoiHoc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiemDanh_BangBuoiHoc" Association="Self.FK_DiemDanh_BangBuoiHoc">
-            <End Role="BangBuoiHoc" EntitySet="BangBuoiHoc" />
-            <End Role="DiemDanh" EntitySet="DiemDanh" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiemDanh_SinhVien" Association="Self.FK_DiemDanh_SinhVien">
-            <End Role="SinhVien" EntitySet="SinhVien" />
-            <End Role="DiemDanh" EntitySet="DiemDanh" />
           </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_MonHoc" Association="Self.FK_KhoaHoc_MonHoc">
             <End Role="MonHoc" EntitySet="MonHoc" />
@@ -227,10 +194,6 @@
             <End Role="KhoaHoc" EntitySet="KhoaHoc" />
             <End Role="sv_kh" EntitySet="sv_kh" />
           </AssociationSet>
-          <AssociationSet Name="FK_sv_kh_SinhVien" Association="Self.FK_sv_kh_SinhVien">
-            <End Role="SinhVien" EntitySet="SinhVien" />
-            <End Role="sv_kh" EntitySet="sv_kh" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -245,8 +208,8 @@
           <Property Name="day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="time" Type="Time" Precision="2" />
           <Property Name="room" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="BangBuoiHoc" ToRole="KhoaHoc" />
-          <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="BangBuoiHoc" ToRole="DiemDanh" />
         </EntityType>
         <EntityType Name="DiemDanh">
           <Key>
@@ -259,8 +222,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="diemDanh1" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BangBuoiHoc" Relationship="Self.FK_DiemDanh_BangBuoiHoc" FromRole="DiemDanh" ToRole="BangBuoiHoc" />
-          <NavigationProperty Name="SinhVien" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="DiemDanh" ToRole="SinhVien" />
+          <Property Name="sessionID" Type="Int32" />
         </EntityType>
         <EntityType Name="GiangVien">
           <Key>
@@ -284,7 +246,15 @@
           <Property Name="maMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="BangBuoiHocs" Relationship="Self.FK_BangBuoiHoc_KhoaHoc" FromRole="KhoaHoc" ToRole="BangBuoiHoc" />
           <NavigationProperty Name="MonHoc" Relationship="Self.FK_KhoaHoc_MonHoc" FromRole="KhoaHoc" ToRole="MonHoc" />
-          <NavigationProperty Name="SinhViens" Relationship="Self.sv_kh" FromRole="KhoaHoc" ToRole="SinhVien" />
+          <NavigationProperty Name="sv_kh" Relationship="Self.FK_sv_kh_KhoaHoc" FromRole="KhoaHoc" ToRole="sv_kh" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFinger" Type="Int32" />
+          <Property Name="Uid" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="MonHoc">
           <Key>
@@ -297,7 +267,7 @@
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
-            <PropertyRef Name="MSSV" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="fullname" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
@@ -306,9 +276,16 @@
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="finger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="maKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="gender" Type="Boolean" />
-          <NavigationProperty Name="DiemDanhs" Relationship="Self.FK_DiemDanh_SinhVien" FromRole="SinhVien" ToRole="DiemDanh" />
-          <NavigationProperty Name="KhoaHocs" Relationship="Self.sv_kh" FromRole="SinhVien" ToRole="KhoaHoc" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="sv_kh">
+          <Key>
+            <PropertyRef Name="maKH" />
+            <PropertyRef Name="MSSV" />
+          </Key>
+          <Property Name="maKH" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KhoaHoc" Relationship="Self.FK_sv_kh_KhoaHoc" FromRole="sv_kh" ToRole="KhoaHoc" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -332,30 +309,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DiemDanh_BangBuoiHoc">
-          <End Role="BangBuoiHoc" Type="Self.BangBuoiHoc" Multiplicity="1" />
-          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BangBuoiHoc">
-              <PropertyRef Name="maBH" />
-            </Principal>
-            <Dependent Role="DiemDanh">
-              <PropertyRef Name="maBH" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiemDanh_SinhVien">
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="1" />
-          <End Role="DiemDanh" Type="Self.DiemDanh" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SinhVien">
-              <PropertyRef Name="MSSV" />
-            </Principal>
-            <Dependent Role="DiemDanh">
-              <PropertyRef Name="MSSV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_KhoaHoc_MonHoc">
           <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="1" />
           <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
@@ -368,45 +321,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="GiangDay">
-          <End Role="GiangVien" Type="Self.GiangVien" Multiplicity="*" />
-          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="*" />
+        <Association Name="FK_sv_kh_KhoaHoc">
+          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="1" />
+          <End Role="sv_kh" Type="Self.sv_kh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhoaHoc">
+              <PropertyRef Name="maKH" />
+            </Principal>
+            <Dependent Role="sv_kh">
+              <PropertyRef Name="maKH" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="sv_kh">
-          <End Role="KhoaHoc" Type="Self.KhoaHoc" Multiplicity="*" />
-          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
+        <Association Name="GiangDay">
+          <End Role="GiangVien" Type="sep21t21Model.GiangVien" Multiplicity="*" />
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="*" />
         </Association>
         <EntityContainer Name="sep21t21Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BangBuoiHocs" EntityType="Self.BangBuoiHoc" />
           <EntitySet Name="DiemDanhs" EntityType="Self.DiemDanh" />
-          <EntitySet Name="GiangViens" EntityType="Self.GiangVien" />
+          <EntitySet Name="GiangViens" EntityType="sep21t21Model.GiangVien" />
           <EntitySet Name="KhoaHocs" EntityType="Self.KhoaHoc" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
           <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
           <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+          <EntitySet Name="sv_kh" EntityType="Self.sv_kh" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK_BangBuoiHoc_KhoaHoc" Association="Self.FK_BangBuoiHoc_KhoaHoc">
             <End Role="KhoaHoc" EntitySet="KhoaHocs" />
             <End Role="BangBuoiHoc" EntitySet="BangBuoiHocs" />
           </AssociationSet>
-          <AssociationSet Name="FK_DiemDanh_BangBuoiHoc" Association="Self.FK_DiemDanh_BangBuoiHoc">
-            <End Role="BangBuoiHoc" EntitySet="BangBuoiHocs" />
-            <End Role="DiemDanh" EntitySet="DiemDanhs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiemDanh_SinhVien" Association="Self.FK_DiemDanh_SinhVien">
-            <End Role="SinhVien" EntitySet="SinhViens" />
-            <End Role="DiemDanh" EntitySet="DiemDanhs" />
-          </AssociationSet>
           <AssociationSet Name="FK_KhoaHoc_MonHoc" Association="Self.FK_KhoaHoc_MonHoc">
             <End Role="MonHoc" EntitySet="MonHocs" />
             <End Role="KhoaHoc" EntitySet="KhoaHocs" />
           </AssociationSet>
+          <AssociationSet Name="FK_sv_kh_KhoaHoc" Association="Self.FK_sv_kh_KhoaHoc">
+            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
+            <End Role="sv_kh" EntitySet="sv_kh" />
+          </AssociationSet>
           <AssociationSet Name="GiangDay" Association="Self.GiangDay">
             <End Role="GiangVien" EntitySet="GiangViens" />
             <End Role="MonHoc" EntitySet="MonHocs" />
-          </AssociationSet>
-          <AssociationSet Name="sv_kh" Association="Self.sv_kh">
-            <End Role="KhoaHoc" EntitySet="KhoaHocs" />
-            <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -423,6 +378,7 @@
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -436,6 +392,7 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="diemDanh1" ColumnName="diemDanh" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -461,6 +418,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="sep21t21Model.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFinger" ColumnName="IdFinger" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MonHocs">
             <EntityTypeMapping TypeName="sep21t21Model.MonHoc">
               <MappingFragment StoreEntitySet="MonHoc">
@@ -479,7 +445,15 @@
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="finger" ColumnName="finger" />
                 <ScalarProperty Name="maKH" ColumnName="maKH" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sv_kh">
+            <EntityTypeMapping TypeName="sep21t21Model.sv_kh">
+              <MappingFragment StoreEntitySet="sv_kh">
+                <ScalarProperty Name="maKH" ColumnName="maKH" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -500,14 +474,6 @@
             </EndProperty>
             <EndProperty Name="MonHoc">
               <ScalarProperty Name="maMH" ColumnName="maMH" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="sv_kh" TypeName="sep21t21Model.sv_kh" StoreEntitySet="sv_kh">
-            <EndProperty Name="KhoaHoc">
-              <ScalarProperty Name="maKH" ColumnName="maKH" />
-            </EndProperty>
-            <EndProperty Name="SinhVien">
-              <ScalarProperty Name="MSSV" ColumnName="MSSV" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

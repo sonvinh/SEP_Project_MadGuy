@@ -61,5 +61,26 @@ namespace SEP_Team1.API
             }
             return null;
         }
+        public string Login (string username, string password)
+        {
+            urlConnect = urlAddress + "/Login?Username={0}&Password={1}";
+            urlConnect = string.Format(urlConnect, username, password);
+            data = Url(urlConnect);
+
+            if (data != "")
+            {
+                dynamic log = JsonConvert.DeserializeObject(data);
+                string code = log.code;
+
+                if (int.Parse(code) == 0)
+                {
+                    string id = log.data.id;
+                    urlConnect = "";
+                    return id;
+                }
+            }
+            urlConnect = "";
+            return "";
+        }
     }
 }
