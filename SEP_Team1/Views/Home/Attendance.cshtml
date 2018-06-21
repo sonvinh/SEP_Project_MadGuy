@@ -103,6 +103,16 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <a href="@Url.Action("ExportToExcel","Home", new {id = ViewBag.MaKH})">Export Excel</a>
+
+                            @*<div class="col-lg-2 col-md-4">
+                                @Html.BeginForm("ExportToExcel", "Home",new {id = ViewBag.MaKH } ,FormMethod.Get)
+                                {
+                                
+                                <button type="submit" id="btnExport" class="btn btn-block btn-lg btn-info">Export To Excel</button>
+                                 }
+                                
+                            </div>*@
                         </div>
                     </div>
                     <!-- Column -->
@@ -114,24 +124,24 @@
     <script type="text/javascript">
         $(function () {
             $("#btnSave").on("click", function (e) {
-                e.preventDefault();
-                var form = $('#fAttendance');
-                var buoiHocID = $("#bhoc").val();
-                var boxes = $('input[name=att]:checked');
-                console.log(buoiHocID);
-                console.log(boxes);
+                                    e.preventDefault();
+                                    var form = $('#fAttendance');
+                                    var buoiHocID = $("#bhoc").val();
+                                    var boxes = $('input[name=att]:checked');
+                                    console.log(buoiHocID);
+                                    console.log(boxes);
                 $.ajax({
-                    type: "POST",
+                                    type: "POST",
                     url: form.attr('action'),
                     data: form.serialize(),
                     success: function (result) {
-                        alert('Changes Completed');
-                    },
+                                            alert('Changes Completed');
+                                        },
                     error: function (response) {
                         $('#student-list').html(response.responseText);
-                    }
-                });
-            })
+                                        }
+                                    });
+                                })
         })
     </script>
 
