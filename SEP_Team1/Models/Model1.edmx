@@ -23,7 +23,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="maBH" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MaKH" Type="nchar" MaxLength="20" Nullable="false" />
-          <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MSSV" Type="nvarchar" MaxLength="20" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="diemDanh" Type="bit" Nullable="false" />
@@ -76,7 +76,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="MSSV" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="MSSV" Type="nvarchar" MaxLength="20" />
           <Property Name="fullname" Type="nvarchar" MaxLength="300" />
           <Property Name="birthday" Type="datetime" />
           <Property Name="firstname" Type="nvarchar" MaxLength="50" />
@@ -218,7 +218,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="maBH" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaKH" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="diemDanh1" Type="Boolean" Nullable="false" />
@@ -269,7 +269,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="fullname" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="birthday" Type="DateTime" Precision="3" />
           <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

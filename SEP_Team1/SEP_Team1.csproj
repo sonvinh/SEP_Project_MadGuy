@@ -5450,6 +5450,7 @@
     <Content Include="Views\Home\Course.cshtml" />
     <Content Include="Views\Home\Check.cshtml" />
     <Content Include="Views\Home\ListStudent.cshtml" />
+    <Content Include="Views\Home\diemDanh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

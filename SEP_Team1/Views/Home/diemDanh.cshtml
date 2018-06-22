@@ -1,0 +1,181 @@
+﻿@model IEnumerable<SEP_Team1.Models.DiemDanh>
+
+@{
+    var buoihoc = (List<SEP_Team1.Models.BangBuoiHoc>)ViewBag.Buoihoc;
+    var students = (List<SEP_Team1.Models.SinhVien>)ViewBag.Student;
+    var diemdanh = (List<SEP_Team1.Models.DiemDanh>)ViewBag.Diemdanh;
+    ViewBag.Title = "diemDanh";
+}
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-12">
+
+            <h4 class="text-white"></h4>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)"></a></li>
+                <li class="breadcrumb-item active"></li>
+            </ol>
+        </div>
+        <div class="col-md-6 text-right">
+            <form class="app-search d-none d-md-block d-lg-block">
+                <input type="text" class="form-control" placeholder="Search &amp; enter">
+            </form>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- Row -->
+    <!-- Comment - table -->
+    <!-- ============================================================== -->
+    <div id="dvAttendance">
+        <form role="checkbox" action="@Url.Action("Ed","Home")" method="post" id="fAttendance">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Column -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Attendance</h4>
+                            <div class="row button-group">
+                                <div class="col-lg-2 col-md-4">
+                                    @Html.DropDownList("bhoc", new SelectList(buoihoc, "maBH", "maBH"), htmlAttributes: new { @class = "custom-select form-control input-sm m-b-10"  })
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <button type="button" id="btnSave" class="btn btn-block btn-lg btn-info">Save</button>
+                                </div>
+                            </div>
+
+                            <div id="student-list" class="table-responsive">
+                                <table class="table color-table dark-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Student</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
+                                            <th>D.O.B</th>
+                                            <th>Attendance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in diemdanh)
+                                        {
+                                            foreach (var sv in students)
+                                            {
+                                                if (sv.MSSV == item.MSSV)
+                                                {
+                                                    <tr>
+                                                        <td><a href="/Home/StudentProfile/@item.MSSV" />@item.MSSV</td>
+                                                        <td>@sv.firstname</td>
+                                                        <td>@sv.lastname</td>
+
+                                                        @{
+                                                            DateTime dt = Convert.ToDateTime(sv.birthday);
+                                                            string nt = dt.ToString("dd/MM/yyyy");
+                                                        }
+                                                        <td>@nt</td>
+                                                        <!-- xu li diem danh-->
+                                                        <td>
+                                                            @Html.CheckBox(item.MSSV, item.diemDanh1, htmlAttributes: new { @id = item.MSSV, @class = "bt-switch" })
+                                                        </td>
+                                                        <!-- -->
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSave").on("click", function (e) {
+                e.preventDefault();
+                var form = $('#fAttendance');
+                var buoiHocID = $("#bhoc").val();
+                var boxes = $('input[name=att]:checked');
+                console.log(buoiHocID);
+                console.log(boxes);
+                $.ajax({
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (result) {
+                        alert('Changes Completed');
+                    },
+                    error: function (response) {
+                        $('#student-list').html(response.responseText);
+                    }
+                });
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(".bt-switch input[type='checkbox'], .bt-switch input[type='radio']").bootstrapSwitch();
+        var radioswitch = function () {
+            var bt = function () {
+                $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioState")
+                }), $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck")
+                }), $(".radio-switch").on("switch-change", function () {
+                    $(".radio-switch").bootstrapSwitch("toggleRadioStateAllowUncheck", !1)
+                })
+            };
+            return {
+                init: function () {
+                    bt()
+                }
+            }
+        }();
+        $(document).ready(function () {
+            radioswitch.init()
+        });
+    </script>
+    <!-- ============================================================== -->
+    <!-- End Comment - chats -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Over Visitor, Our income , slaes different and  sales prediction -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Page Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Todo, chat, notification -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Page Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
