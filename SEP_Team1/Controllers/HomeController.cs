@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using SEP_Team1.Models;
 using SEP_Team1.API;
+using OfficeOpenXml;
+using System.Web.UI.WebControls;
+using System.IO;
+using System.Web.UI;
 
 namespace SEP_Team1.Controllers
 {
@@ -69,6 +73,7 @@ namespace SEP_Team1.Controllers
             var sinhvien = db.SinhViens.Where(v => v.maKH == id).ToList();
             ViewBag.Student = sinhvien;
             ViewBag.Subject = monhoc;
+
 
             return View();
         }
@@ -177,6 +182,7 @@ namespace SEP_Team1.Controllers
             ViewBag.CountStudent = sinhvien.Count();
             ViewBag.Buoihoc = buoihoc;
             ViewBag.Subject = monhoc;
+            ViewBag.MaKH = id;
             return View();
         }
 
@@ -258,6 +264,69 @@ namespace SEP_Team1.Controllers
             Session["hoten"] = null;
             Session["MaGV"] = null;
             return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public void ExportToExcel(string id)
+        {
+            List<DiemDanh> diemDanh = db.DiemDanhs.Where(x => x.MaKH == id && x.sessionID==1).ToList();
+            List<SinhVien> sinhVien = db.SinhViens.Where(x=> x.maKH == id).ToList();
+            List<DiemDanhViewModel> emplist = new List<DiemDanhViewModel>();
+            foreach(var dd in diemDanh)
+            {
+               
+                    foreach (var sv in sinhVien)
+                    {
+                        if (sv.MSSV.Trim() == dd.MSSV.Trim())
+                        {
+                            DiemDanhViewModel ddModel = new DiemDanhViewModel
+                            {
+                                MSSV = sv.MSSV,
+                                firstname = sv.firstname,
+                                lastname = sv.lastname,
+                                birthday = (DateTime)sv.birthday,
+                                DiemDanh = dd.diemDanh1,
+                            };
+                            emplist.Add(ddModel);
+                        }
+                   
+                    }
+                    
+               
+            }
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1"].Value = "Course";
+            ws.Cells["B1"].Value = id;
+
+            ws.Cells["A2"].Value = "Date";
+            ws.Cells["B2"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+
+            ws.Cells["A6"].Value = "ID";
+            ws.Cells["B6"].Value = "Last Name";
+            ws.Cells["C6"].Value = "First Name";
+            ws.Cells["D6"].Value = "Birhday";
+            ws.Cells["E6"].Value = "Attendance";
+
+            int rowStart = 7;
+            foreach (var item in emplist)
+            {
+                ws.Cells[string.Format("A{0}", rowStart)].Value = item.MSSV;
+                ws.Cells[string.Format("B{0}", rowStart)].Value = item.lastname;
+                ws.Cells[string.Format("C{0}", rowStart)].Value = item.firstname;
+                ws.Cells[string.Format("D{0}", rowStart)].Value = string.Format("{0:dd/MM/yyyy}",item.birthday);
+                ws.Cells[string.Format("E{0}", rowStart)].Value = item.DiemDanh;
+                rowStart++;
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "ExcelReport.xlsx");
+            Response.BinaryWrite(pck.GetAsByteArray());
+            Response.End();
+
         }
     }
 }
